@@ -5,11 +5,38 @@ import {
 } from '../actions/types'
 
 function decks (state ={}, action){
+  const { deck, id, type, card, deckId } = action
+  let returnValue
   console.log('in the reducer')
   console.log(action)
-  switch (action.type) {
+  switch (type) {
     case CREATE_DECK:
-      return state
+      console.log('in create Deck')
+      console.log(id)
+      console.log(deck)
+      console.log(state)
+      returnValue = {...state}
+      /*returnValue = {...state,
+            state.decks:
+            { ...state.decks, id }
+          }*/
+      returnValue[id] = {
+        title: deck,
+        questions: []
+      }
+
+      console.log(returnValue)
+
+      return returnValue
+/*
+      return { ...state, ...state.decks,
+          state.decks[id]: {
+            title: {
+              deck
+            },
+            questions: []
+          }
+          */
 
     case INITIALIZE_DECK:
       console.log('in initialize deck reducer')
@@ -21,7 +48,10 @@ function decks (state ={}, action){
       return result
 
     case ADD_CARD:
-      return state
+      returnValue =  { ...state}
+      console.log(returnValue)
+      returnValue[deckId].questions.push(card)
+      return returnValue
 
     default:
       return state

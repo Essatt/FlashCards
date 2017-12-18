@@ -9,6 +9,9 @@ import reducer from './reducers'
 import { setLocalNotification } from './src/utils/helpers'
 import { white, purple } from './src/utils/colors'
 import DeckList from './src/components/DeckList'
+import Deck from './src/components/Deck'
+import CreateDeck from './src/components/CreateDeck'
+import CreateCard from './src/components/CreateCard'
 
 
 function TinyStatusBar ({ backgroundColor, ...props}){
@@ -20,21 +23,30 @@ function TinyStatusBar ({ backgroundColor, ...props}){
 }
 
 /*
+
+<TouchableOpacity onPress={() => this.props.navigation.navigate(
+        'EntryDetail',
+        { entryId: key}
+      )}>
+
+*/
+
+
 const MainNavigator = StackNavigator({
   Home: {
-    screen: Tabs,
+    screen: DeckList,
   },
-  EntryDetail: {
-    screen: EntryDetail,
-    navigationOptions: {
-      headerTintColor: white,
-      headerStyle: {
-        backgroundColor: purple,
-      }
-    }
-  }
+  Deck: {
+    screen: Deck,
+  },
+  CreateDeck: {
+    screen: CreateDeck,
+  },
+  CreateCard: {
+    screen: CreateCard,
+  },
 })
-*/
+
 
 export default class App extends React.Component {
   componentDidMount () {
@@ -46,7 +58,7 @@ export default class App extends React.Component {
       <Provider store={createStore(reducer)}>
         <View style={{flex:1}}>
           <TinyStatusBar backgroundColor={purple} barStyle='light-content' />
-          <DeckList />
+          <MainNavigator />
         </View>
       </Provider>
     )

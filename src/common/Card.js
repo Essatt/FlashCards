@@ -2,8 +2,9 @@ import React from 'react'
 import { View, StyleSheet } from 'react-native'
 
 export function Card (props) {
+
   return (
-    <View style={styles.containerStyle}>
+    <View style={[styles.containerStyle, props.style]}>
       {props.children}
     </View>
   )
@@ -21,6 +22,9 @@ const styles = StyleSheet.create({
     shadowRadius: 1,
     marginLeft: 5,
     marginRight: 5,
-    marginTop: 10
+    marginTop: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
   }
 })

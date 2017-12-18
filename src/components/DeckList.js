@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 
-import { Card } from '../common'
+import { Card, CardSection } from '../common'
 //import Deck from './Deck'
 import { mockDB, getDecks } from '../utils/api'
 import { initializeDecks } from '../../actions'
 import { objToArray } from '../utils/helpers'
 
 class DeckList extends Component {
-  componentDidMount(){
+  /*componentDidMount(){
     mockDB()
       .then(getDecks())
       .then((decks) => {
@@ -18,7 +18,9 @@ class DeckList extends Component {
         return
       })
       .then(() => console.log(this.props))
-  }
+  }*/
+
+
 
   getDecks() {
     const { decks } = this.props
@@ -31,46 +33,51 @@ class DeckList extends Component {
       let decksUI = dataArray.map((deck) => {
         console.log(deck)
         return(
-          <View key={deck.key}>
+          <TouchableOpacity
+            onPress={() => this.props.navigation.navigate(
+            'Deck',
+            { deckId: deck.key})}
+            key={deck.key}
+          >
             <Card>
-              {console.log(deck.title)}
-              <Text>{deck.title}</Text>
-
+              <Text style={styles.deckTitle}>{deck.title}</Text>
+              <Text style={styles.cardNumber}>{`${deck.questions.length} Cards`}</Text>
             </Card>
-          </View>
+          </TouchableOpacity>
         )
 
       })
-      //console.log((decksUI.toString()))
+
       return decksUI
     }
 
 
   }
 
+  createDeckSection = () => {
+    return(
+      <TouchableOpacity
+        onPress={() => this.props.navigation.navigate('CreateDeck')}
+      >
+          <Card>
+            <Text style={styles.createDeckSection}>Create a New Deck!</Text>
+          </Card>
+      </TouchableOpacity>
+    )
+
+  }
+
 
   render(){
     const decks = this.getDecks()
+    const createDeckSection = this.createDeckSection()
     console.log(this.props)
-    /*let cards =
-    {
-      for (let key in decks) {
-        if (decks.hasOwnProperty(key)) {
-          return (
-            <View key={key}>
-              <Card>
-                {decks[key].title}
-                {console.log(decks[key].title)}
-              </Card>
-            </View>
-          )
-        }
-      }
-    }*/
     return(
-      <View>
-
-        {decks}
+      <View style={styles.container}>
+        <ScrollView>
+          {createDeckSection}
+          {decks}
+        </ScrollView>
       </View>
     )
   }
@@ -78,15 +85,30 @@ class DeckList extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    flex: 1,
     marginTop: 25,
-  }
+    marginHorizontal: 20,
+  },
+  deckTitle: {
+    fontSize: 20,
+    margin: 10,
+    marginBottom: 5,
+  },
+  cardNumber: {
+    fontSize: 12,
+    color: 'gray',
+    margin: 10,
+    marginTop: 0,
+  },
+  createDeckSection: {
+    fontSize: 15,
+    margin: 5,
+  },
 })
 
 function mapStateToProps( state ){
   console.log(state)
-  return state
+  return {decks:state}
 }
 
 /*

@@ -1,8 +1,8 @@
-import React from 'react';
-import { TextInput, View, Text, StyleSheet } from 'react-native';
+import React from 'react'
+import { TextInput, View, Text, StyleSheet } from 'react-native'
 
-export default function Input ({ label, value, onChangeText, placeholder, secureTextEntry }) {
-const { inputStyle, labelStyle, containerStyle } = styles;
+export function Input ({ label, value, onChangeText, placeholder, secureTextEntry }) {
+  const { inputStyle, labelStyle, containerStyle } = styles
 
   return (
     <View style={containerStyle}>
@@ -16,8 +16,8 @@ const { inputStyle, labelStyle, containerStyle } = styles;
         onChangeText={onChangeText}
       />
     </View>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   inputStyle: {
