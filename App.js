@@ -12,8 +12,9 @@ import DeckList from './src/components/DeckList'
 import Deck from './src/components/Deck'
 import CreateDeck from './src/components/CreateDeck'
 import CreateCard from './src/components/CreateCard'
+import Quiz from './src/components/Quiz'
 
-
+//TODO Implement push notificiations
 function TinyStatusBar ({ backgroundColor, ...props}){
   return(
     <View style={{ backgroundColor, height: Constants.statusBarHeight }}>
@@ -21,6 +22,7 @@ function TinyStatusBar ({ backgroundColor, ...props}){
     </View>
   )
 }
+
 
 /*
 
@@ -44,6 +46,9 @@ const MainNavigator = StackNavigator({
   },
   CreateCard: {
     screen: CreateCard,
+  },
+  Quiz: {
+    screen: Quiz,
   },
 })
 

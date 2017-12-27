@@ -8,6 +8,7 @@ import { mockDB, getDecks } from '../utils/api'
 import { initializeDecks } from '../../actions'
 import { objToArray } from '../utils/helpers'
 
+//TODO check for todos
 class DeckList extends Component {
   /*componentDidMount(){
     mockDB()
@@ -56,6 +57,7 @@ class DeckList extends Component {
 
   createDeckSection = () => {
     return(
+      //TODO make an animation while routing to Deck view
       <TouchableOpacity
         onPress={() => this.props.navigation.navigate('CreateDeck')}
       >

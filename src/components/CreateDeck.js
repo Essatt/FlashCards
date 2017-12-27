@@ -37,7 +37,9 @@ class CreateDeck extends Component {
             onChangeText={this.editText}
           />
           <TouchableOpacity onPress={this.submitDeck}>
-            <Text style={styles.submit}>Submit</Text>
+            <Text style={styles.submit} >
+              Create Deck 
+            </Text>
           </TouchableOpacity>
         </Card>
       </View>

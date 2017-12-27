@@ -41,7 +41,10 @@ class Deck extends Component {
   }
 
   startQuiz = () => {
-
+    this.props.navigation.navigate(
+      'Quiz',
+      { deckId: this.props.deckId}
+    )
   }
 
   render(){
@@ -54,13 +57,13 @@ class Deck extends Component {
         <View style={styles.buttonGroup}>
           <Button
             onPress={this.addCard}
-            title="Add Card"
+            title="Create New Question"
             color="#841584"
             accessibilityLabel="Learn more about this purple button"
           />
           <Button
             onPress={this.startQuiz}
-            title="Start Quiz"
+            title="Start a Quiz"
             color="black"
             accessibilityLabel="Learn more about this purple button"
           />
