@@ -13,6 +13,7 @@ import Deck from './src/components/Deck'
 import CreateDeck from './src/components/CreateDeck'
 import CreateCard from './src/components/CreateCard'
 import Quiz from './src/components/Quiz'
+import QuizResult from './src/components/QuizResult'
 
 //TODO Implement push notificiations
 function TinyStatusBar ({ backgroundColor, ...props}){
@@ -49,6 +50,9 @@ const MainNavigator = StackNavigator({
   },
   Quiz: {
     screen: Quiz,
+  },
+  QuizResult: {
+    screen: QuizResult,
   },
 })
 

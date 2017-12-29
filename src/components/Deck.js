@@ -41,6 +41,9 @@ class Deck extends Component {
   }
 
   startQuiz = () => {
+    if (this.state.cards === 0){
+      return
+    }
     this.props.navigation.navigate(
       'Quiz',
       { deckId: this.props.deckId}
