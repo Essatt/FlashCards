@@ -19,7 +19,6 @@ class CreateDeck extends Component {
     this.props.dispatch(createDeck(this.state.name))
     let goBack= NavigationActions.back()
     this.props.navigation.dispatch(goBack)
-    //this.props.navigation.navigate('Home')
   }
 
   render(){
@@ -38,12 +37,11 @@ class CreateDeck extends Component {
           />
           <TouchableOpacity onPress={this.submitDeck}>
             <Text style={styles.submit} >
-              Create Deck 
+              Create Deck
             </Text>
           </TouchableOpacity>
         </Card>
       </View>
-
     )
   }
 }
@@ -69,7 +67,6 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     marginRight: 20,
     marginTop: 20,
-    //marginTop:
   },
   submit: {
 

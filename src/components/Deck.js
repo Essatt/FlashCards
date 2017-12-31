@@ -36,7 +36,7 @@ class Deck extends Component {
   addCard = () => {
     this.props.navigation.navigate(
       'CreateCard',
-      { deckId: this.props.deckId}
+      { deckId: this.props.deckId }
     )
   }
 
@@ -46,7 +46,10 @@ class Deck extends Component {
     }
     this.props.navigation.navigate(
       'Quiz',
-      { deckId: this.props.deckId}
+      {
+        deckId: this.props.deckId,
+        deckNavKey: this.props.navigation.state.key,
+      }
     )
   }
 
