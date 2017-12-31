@@ -3,11 +3,13 @@ import { AsyncStorage } from 'react-native'
 import { Notifications, Permissions } from 'expo'
 const NOTIFICATION_KEY = 'NOTIFICATION_KEY:FLASHCARDS'
 
+//This code is taken from the Udacity React Nanodegree Lectures
 export function clearLocalNotification() {
   return AsyncStorage.removeItem(NOTIFICATION_KEY)
     .then(Notifications.cancelAllScheduledNotificationsAsync)
 }
 
+//This code is taken from the Udacity React Nanodegree Lectures
 export function createNotification() {
   return {
     title: 'Time to Study!',
@@ -24,6 +26,7 @@ export function createNotification() {
   }
 }
 
+//This code is taken from the Udacity React Nanodegree Lectures
 export function setLocalNotification() {
   AsyncStorage.getItem(NOTIFICATION_KEY)
     .then(JSON.parse)

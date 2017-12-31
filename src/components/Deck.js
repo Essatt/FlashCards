@@ -9,7 +9,6 @@ class Deck extends Component {
   }
 
   componentDidMount(){
-    console.log(this.props.deckId)
     this.initializeState()
 
   }
@@ -19,17 +18,13 @@ class Deck extends Component {
   }
 
   initializeState = () => {
-    console.log(this.props.deckId)
-    console.log(this.props.decks)
     if (this.props.deckId !== undefined){
-      console.log(this.props.deckId)
       if(this.props.decks[this.props.deckId] !== undefined){
         const deck = this.props.decks[this.props.deckId]
         const title = deck.title
         const cards = deck.questions.length
         this.setState({ title, cards })
       }
-
     }
   }
 
@@ -73,10 +68,7 @@ class Deck extends Component {
             color="black"
             accessibilityLabel="Learn more about this purple button"
           />
-
-
         </View>
-
       </View>
     )
   }

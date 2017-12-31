@@ -15,7 +15,6 @@ import CreateCard from './src/components/CreateCard'
 import Quiz from './src/components/Quiz'
 import QuizResult from './src/components/QuizResult'
 
-//TODO Implement push notificiations
 function TinyStatusBar ({ backgroundColor, ...props}){
   return(
     <View style={{ backgroundColor, height: Constants.statusBarHeight }}>
@@ -23,17 +22,6 @@ function TinyStatusBar ({ backgroundColor, ...props}){
     </View>
   )
 }
-
-
-/*
-
-<TouchableOpacity onPress={() => this.props.navigation.navigate(
-        'EntryDetail',
-        { entryId: key}
-      )}>
-
-*/
-
 
 const MainNavigator = StackNavigator({
   Home: {
@@ -73,13 +61,3 @@ export default class App extends React.Component {
     )
   }
 }
-
-/*
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});*/

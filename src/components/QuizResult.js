@@ -35,7 +35,6 @@ class QuizResult extends Component {
           </Text>
         </View>
 
-
         <View style={styles.buttonGroup}>
           <TouchableOpacity onPress={this.restartQuiz}>
             <View style={styles.restartQuizButton} >
@@ -56,7 +55,6 @@ class QuizResult extends Component {
     )
   }
 }
-
 
 const styles = StyleSheet.create({
   container: {
