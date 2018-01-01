@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 import { NavigationActions } from 'react-navigation'
+import uuidv4 from 'uuid/v4'
 
 import { Input, Card } from '../common'
 import { createDeck } from '../../actions'
@@ -16,9 +17,20 @@ class CreateDeck extends Component {
   }
 
   submitDeck = () => {
-    this.props.dispatch(createDeck(this.state.name))
-    let goBack= NavigationActions.back()
-    this.props.navigation.dispatch(goBack)
+    const id = uuidv4()
+    this.props.dispatch(createDeck(this.state.name, id))
+
+    const resetAction = NavigationActions.reset({
+      index: 1,
+      //deckId: id,
+      actions: [
+        NavigationActions.navigate({ routeName: 'Home'}),
+        NavigationActions.navigate({ routeName: 'Deck'})
+      ]
+    })
+    this.props.navigation.dispatch(resetAction)
+    //let goBack= NavigationActions.back()
+    //this.props.navigation.dispatch(goBack)
   }
 
   render(){

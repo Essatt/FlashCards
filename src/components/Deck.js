@@ -108,7 +108,9 @@ const styles = StyleSheet.create({
 })
 
 function mapStateToProps ( state, { navigation }) {
+  console.log(navigation)
   const { deckId } = navigation.state.params
+  console.log(deckId)
 
   return {
     deckId,

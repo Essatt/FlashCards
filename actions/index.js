@@ -1,4 +1,3 @@
-import uuidv4 from 'uuid/v4'
 import {
   CREATE_DECK,
   INITIALIZE_DECK,
@@ -12,11 +11,11 @@ export function initializeDecks(decks){
   }
 }
 
-export function createDeck(deck){
+export function createDeck(deck, id){
   return{
     type: CREATE_DECK,
     deck,
-    id: uuidv4()
+    id
   }
 }
 
