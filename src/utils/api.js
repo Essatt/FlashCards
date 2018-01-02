@@ -31,9 +31,12 @@ export function mockDB(){
     .then(() => {
        return getDecks()
     })
-  console.log(result)
   return result
 
+}
+
+export function clearData(){
+  AsyncStorage.setItem(DECK_STORAGE_KEY, '')
 }
 
 export function getDecks(){
@@ -49,12 +52,70 @@ export function getDeck(id){
     })
 }
 
-export function saveDeckTitle(title){
+export function saveDeckTitle(title, id){
+  let result = getDecks()
+  console.log(result)
+  if(Object.keys(result).length === 0 && result.constructor === Object){
+    console.log('in the its empty section')
+    let decks = {}
+    decks[id] = {
+      "title": title,
+      "questions": [],
+    }
+  }else{
+    console.log('in the its not sooo empty section')
+    result = JSON.parse(result)
 
+    let decks = {...result}
+    console.log(decks)
+    decks[id] = {
+      "title": title,
+      "questions": [],
+    }
+  }
+
+
+
+
+
+  /*if(Object.keys(decks).length === 0 && decks.constructor === Object){
+    let decks = {...result}
+    decks[id] = {
+      "title": title,
+      "questions": [],
+    }
+
+    /*decks = {...decks, decks[id]:
+                ...decks[id], {
+                  "title": title,
+                  "questions": [],
+                }
+              }
+  }else{
+    let decks[id] = {
+      "title": title,
+      "questions": [],
+    }
+  }*/
+
+  console.log(decks)
+  AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify(decks))
+  .then(() => {
+    let result = getDecks()
+     console.log(result)
+  })
 }
 
-export function addCardToDeck(title, card){
-
+export function addCardToDeck(card, deckId){
+  let decks = getDecks()
+  //decks = {...decks}
+  console.log(decks)
+  decks[deckId].questions.push(card)
+  AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify(decks))
+  .then(() => {
+    let result = getDecks()
+     console.log(result)
+  })
 }
 
 

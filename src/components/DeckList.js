@@ -4,35 +4,39 @@ import { connect } from 'react-redux'
 
 import { Card, CardSection } from '../common'
 //import Deck from './Deck'
-import { mockDB, getDecks } from '../utils/api'
+import { mockDB, getDecks, clearData } from '../utils/api'
 import { initializeDecks } from '../../actions'
 import { objToArray } from '../utils/helpers'
 
 //TODO check for todos
 class DeckList extends Component {
-  /*componentDidMount(){
-    mockDB()
-      .then(getDecks())
+  componentDidMount(){
+    //clearData()
+    getDecks()
       .then((decks) => {
         console.log(decks)
         this.props.dispatch(initializeDecks(JSON.parse(decks)))
         return
       })
       .then(() => console.log(this.props))
-  }*/
+  }
 
 
 
   getDecks() {
-    const { decks } = this.props
+    let { decks } = this.props
     console.log(this.props)
     console.log(decks)
     let dataArray
-    if (decks !== undefined){
+    if (decks !== undefined &&
+        Object.keys(decks).length === 0 &&
+        decks.constructor === Object){
+
       dataArray = objToArray(decks)
       console.log(dataArray)
       let decksUI = dataArray.map((deck) => {
         console.log(deck)
+        console.log(deck.questions)
         return(
           <TouchableOpacity
             onPress={() => this.props.navigation.navigate(
@@ -113,13 +117,4 @@ function mapStateToProps( state ){
   return {decks:state}
 }
 
-/*
-function mapDispatchToProps ({ dispatch }){
-  return {
-    initializeDecks: (decks) => {
-      dispatch(initializeDecks(decks))
-    }
-  }
-}
-*/
 export default connect(mapStateToProps)(DeckList)

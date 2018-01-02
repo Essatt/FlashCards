@@ -5,6 +5,7 @@ import { NavigationActions } from 'react-navigation'
 
 import { Input, Card } from '../common'
 import { addCard } from '../../actions'
+import { addCardToDeck } from '../utils/api'
 
 class CreateCard extends Component {
   state = {
@@ -15,6 +16,7 @@ class CreateCard extends Component {
 
   componentDidMount(props){
     this.setState({ deckId: this.props.deckId })
+    console.log(this.props.deckId)
   }
 
   editText = (text, label) => {
@@ -26,13 +28,12 @@ class CreateCard extends Component {
   }
 
   submitCard = () => {
-    this.props.dispatch(addCard(
-      {
-        question: this.state.question,
-        answer: this.state.answer
-      },
-      this.state.deckId
-    ))
+    const card = {
+      question: this.state.question,
+      answer: this.state.answer
+    }
+    addCardToDeck(card, this.state.deckId)
+    this.props.dispatch(addCard(card, this.state.deckId))
     let goBack= NavigationActions.back()
     this.props.navigation.dispatch(goBack)
     //this.props.navigation.navigate('Deck', { deckId: this.state.deckId})

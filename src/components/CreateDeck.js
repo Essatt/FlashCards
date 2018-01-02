@@ -6,6 +6,7 @@ import uuidv4 from 'uuid/v4'
 
 import { Input, Card } from '../common'
 import { createDeck } from '../../actions'
+import { saveDeckTitle } from '../utils/api'
 
 class CreateDeck extends Component {
   state = {
@@ -18,6 +19,7 @@ class CreateDeck extends Component {
 
   submitDeck = () => {
     const id = uuidv4()
+    saveDeckTitle(this.state.name, id)
     this.props.dispatch(createDeck(this.state.name, id))
 
     const resetAction = NavigationActions.reset({
@@ -25,7 +27,7 @@ class CreateDeck extends Component {
       //deckId: id,
       actions: [
         NavigationActions.navigate({ routeName: 'Home'}),
-        NavigationActions.navigate({ routeName: 'Deck'})
+        NavigationActions.navigate({ routeName: 'Deck', params: {deckId: id}})
       ]
     })
     this.props.navigation.dispatch(resetAction)
@@ -34,7 +36,6 @@ class CreateDeck extends Component {
   }
 
   render(){
-    console.log(styles.cardStyle)
     return(
       <View style={styles.container}>
         <Card style={styles.cardStyle}>
