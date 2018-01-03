@@ -15,7 +15,13 @@ class DeckList extends Component {
     getDecks()
       .then((decks) => {
         console.log(decks)
-        this.props.dispatch(initializeDecks(JSON.parse(decks)))
+        if (decks !== null){
+
+        }else{
+          decks = {}
+        }
+        console.log(decks)
+        this.props.dispatch(initializeDecks(decks))
         return
       })
       .then(() => console.log(this.props))
