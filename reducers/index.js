@@ -18,7 +18,7 @@ function decks (state ={}, action){
 
     case INITIALIZE_DECK:
       let data = action.decks
-      let result = { ...state, decks: {...data}}
+      let result = { ...state, ...data}
       return result
 
     case ADD_CARD:

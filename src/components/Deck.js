@@ -1,16 +1,19 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, Button, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, Button, TouchableOpacity, Animated } from 'react-native'
 import { connect } from 'react-redux'
 
 class Deck extends Component {
   state = {
     title: '',
     cards: 0,
+    opacity: new Animated.Value(0),
   }
 
   componentDidMount(){
+    const { opacity } = this.state
     this.initializeState()
 
+    Animated.timing(opacity: { toValue: 1, duration: 1000}).start()
   }
 
   componentWillReceiveProps(newProps){
@@ -49,8 +52,9 @@ class Deck extends Component {
   }
 
   render(){
+    const { opacity } = this.state
     return(
-      <View style={styles.container}>
+      <Animated.View style={[styles.container, { opacity } ]}>
         <View style={styles.textGroup}>
           <Text style={styles.deckTitle}>{this.state.title}</Text>
           <Text style={styles.cardNumber}>{`${this.state.cards} cards`}</Text>
@@ -69,7 +73,7 @@ class Deck extends Component {
             accessibilityLabel="Learn more about this purple button"
           />
         </View>
-      </View>
+      </Animated.View>
     )
   }
 

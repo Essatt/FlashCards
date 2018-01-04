@@ -57,11 +57,14 @@ export function setLocalNotification() {
 
 export function objToArray(data) {
   console.log(data)
+  delete data.id;
+  let resultValue = Object.keys(data).map(function(key) {
+    return {...data[key], key};
+  })
+  console.log(resultValue)
   return (
-          Object.keys(data).map(function(key) {
-            return {...data[key], key};
-          })
-        )
+    resultValue
+  )
 }
 
 export function sortResults(theArray, sortParameter){

@@ -40,13 +40,7 @@ export function clearData(){
 }
 
 export function getDecks(){
-  let result = AsyncStorage.getItem(DECK_STORAGE_KEY)
-    .then(JSON.parse)
-    .then((result) => {
-      return result
-    })
-
-  return result
+  return AsyncStorage.getItem(DECK_STORAGE_KEY)
 }
 
 export function getDeck(id){
@@ -57,112 +51,43 @@ export function getDeck(id){
 }
 
 export function saveDeckTitle(title, id){
-  return AsyncStorage.mergeItem(DECK_STORAGE_KEY, JSON.stringify({
-    [id]: {
-      "title": title,
-      "questions": [],
-    },
-  }))
-
-
-
-  /*
-  let result = getDecks()
-  console.log(result)
-  if(Object.keys(result).length === 0 && result.constructor === Object){
-    console.log('in the its empty section')
-    let decks = {}
-    decks[id] = {
-      "title": title,
-      "questions": [],
+  getDecks()
+  .then(JSON.parse)
+  .then(async (result) => {
+    console.log(result)
+    let decks
+    if((result === null) || (Object.keys(result).length === 0 && result.constructor === Object)){
+      //the deck is not initialized, so we set it to empty object
+      decks = {}
+      decks[id] = {
+        "title": title,
+        "questions": [],
+      }
+    }else{
+      decks = {...result, id}
+      decks[id] = {
+        "title": title,
+        "questions": [],
+      }
     }
-  }else{
-    console.log('in the its not sooo empty section')
-    result = JSON.parse(result)
 
-    let decks = {...result}
     console.log(decks)
-    decks[id] = {
-      "title": title,
-      "questions": [],
-    }
-  }*/
-
-
-
-
-
-  /*if(Object.keys(decks).length === 0 && decks.constructor === Object){
-    let decks = {...result}
-    decks[id] = {
-      "title": title,
-      "questions": [],
-    }
-
-    /*decks = {...decks, decks[id]:
-                ...decks[id], {
-                  "title": title,
-                  "questions": [],
-                }
-              }
-  }else{
-    let decks[id] = {
-      "title": title,
-      "questions": [],
-    }
-  }*/
-
-
-
-
-/*
-  console.log(decks)
-  AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify(decks))
-  .then(() => {
-    let result = getDecks()
-     console.log(result)
-  })*/
-}
-
-export function addCardToDeck(card, deckId){
-  let decks = getDecks()
-  //decks = {...decks}
-  console.log(decks)
-  decks[deckId].questions.push(card)
-  AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify(decks))
-  .then(() => {
-    let result = getDecks()
-     console.log(result)
+    //we need this await, as the DeckList re-renders before this is executed
+    await AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify(decks))
   })
 }
 
-
-
-
-
-
-/*
-
-
-export function fetchCalenderResults() {
-  return AsyncStorage.getItem(CALENDAR_STORAGE_KEY)
-    .then(formatCalenderResults)
-}
-
-export function submitEntry({ entry, key }) {
-  return AsyncStorage.mergeItem(CALENDAR_STORAGE_KEY, JSON.stringify({
-    [key]: entry,
-  }))
-}
-
-export function removeEntry(key) {
-  return AsyncStorage.getItem(CALENDAR_STORAGE_KEY)
-    .then((results) => {
-      const data = JSON.parse(results)
-      console.log(data)
-      data[key] = undefined
-      delete data[key]
-      AsyncStorage.setItem(CALENDAR_STORAGE_KEY, JSON.stringify(data))
+export function addCardToDeck(card, deckId){
+  getDecks()
+  .then(JSON.parse)
+  .then((decks) => {
+    //decks = {...decks}
+    console.log(decks)
+    decks[deckId].questions.push(card)
+    AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify(decks))
+    .then(() => {
+      let result = getDecks()
+       console.log(result)
     })
+  })
 }
-*/

@@ -13,6 +13,7 @@ class DeckList extends Component {
   componentDidMount(){
     //clearData()
     getDecks()
+      .then(JSON.parse)
       .then((decks) => {
         console.log(decks)
         if (decks !== null){
@@ -34,10 +35,12 @@ class DeckList extends Component {
     console.log(this.props)
     console.log(decks)
     let dataArray
-    if (decks !== undefined &&
-        Object.keys(decks).length === 0 &&
-        decks.constructor === Object){
-
+    if(decks === undefined){
+      return null
+    }
+    if (!(Object.keys(decks).length === 0 &&
+        decks.constructor === Object)){
+      console.log('in the thannnggg')
       dataArray = objToArray(decks)
       console.log(dataArray)
       let decksUI = dataArray.map((deck) => {
@@ -60,6 +63,9 @@ class DeckList extends Component {
       })
 
       return decksUI
+    }else{
+      console.log('yeh it skipped')
+      return null
     }
 
 
