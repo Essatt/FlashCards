@@ -13,7 +13,7 @@ class Deck extends Component {
     const { opacity } = this.state
     this.initializeState()
 
-    Animated.timing(opacity: { toValue: 1, duration: 1000}).start()
+    Animated.timing(opacity, { toValue: 1, duration: 1000}).start()
   }
 
   componentWillReceiveProps(newProps){
