@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 
+import { setLocalNotification } from '../utils/helpers'
+
 class Quiz extends Component {
   state = {
     side:'q',
@@ -32,6 +34,7 @@ class Quiz extends Component {
         return { index: previousState.index+1 }
       })
     }else{
+      setLocalNotification()
       //did this because the asycronous stuff messed up
       const correct = this.state.correct
       const index = this.state.index
